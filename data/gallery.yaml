@@ -15,6 +15,7 @@ photos:
     date: "2026-01-01"
     location: "Hong Kong"
     favourite: true
+    portrait: true
 
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4155.JPG"
     title: "Central after dark"
@@ -34,12 +35,14 @@ photos:
     alt: "Dense residential buildings overlooking a busy Hong Kong intersection"
     date: "2026-01-01"
     location: "Hong Kong"
+    portrait: true
 
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4221.JPG"
     title: "Between the trees"
     alt: "A worker washing sunlit steps framed by dense green trees"
     date: "2026-01-01"
     location: "Hong Kong"
+    portrait: true
 
   - src: "https://r2-media.simongorbet.com/photos/yosemite-2025/DSCF3123.JPG"
     title: "Yosemite study"
@@ -115,27 +118,32 @@ photos:
     alt: "Trees and shrubs growing from sculptural balconies beneath a blue sky"
     date: "2026-01-01"
     location: "Shanghai, China"
+    portrait: true
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5324.JPG"
     title: "Panda lookout"
     alt: "A panda-shaped viewing scope facing misty sandstone peaks"
     date: "2026-01-01"
     location: "Zhangjiajie, China"
+    portrait: true
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5351.JPG"
     title: "On the ridge"
     alt: "A macaque standing on a rock against a misty mountain forest"
     date: "2026-01-01"
     location: "Zhangjiajie, China"
+    portrait: true
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5374.JPG"
     title: "Forest portrait"
     alt: "A young macaque sitting on a rock in a forest"
     date: "2026-01-01"
     location: "Zhangjiajie, China"
+    portrait: true
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5409.JPG"
     title: "Under the eaves"
     alt: "Red and black structural beams projecting against a pale sky"
     date: "2026-01-01"
     location: "China"
+    portrait: true

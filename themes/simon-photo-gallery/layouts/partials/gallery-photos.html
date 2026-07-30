@@ -11,7 +11,9 @@
   {{- $alt := $photo.alt | default (printf "%s — photograph by %s" $title (site.Params.photographer | default site.Title)) -}}
   {{- $date := $photo.date | default "unknown" -}}
   {{- $location := $photo.location | default "unknown" -}}
-  {{- $dimensions := $photo.dimensions | default (dict "width" 1500 "height" 1000) -}}
+  {{- $portrait := $photo.portrait | default false -}}
+  {{- $defaultDimensions := cond $portrait (dict "width" 1000 "height" 1500) (dict "width" 1500 "height" 1000) -}}
+  {{- $dimensions := $photo.dimensions | default $defaultDimensions -}}
   {{- $urls := $photo.urls | default dict -}}
   {{- $thumbnail := $source -}}
   {{- $grid := $source -}}

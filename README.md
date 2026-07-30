@@ -45,7 +45,7 @@ Unknown metadata is displayed honestly as `Unknown`; add a date or location only
 
 Add a record containing `src` to the `photos` array; remove the record to remove a photograph. Use ISO `YYYY-MM-DD` dates when known. Use a plain location string such as `Yosemite, United States`. Omit either field to display `Unknown`. Mark any number of records as `favourite: true` to place them first.
 
-The default desktop layout automatically cycles through three equal columns. For an optional custom placement, `layout.column_start` is a 1–12 start line, `column_span` is its width, and `row_span` controls height. Tablet and mobile rules ignore desktop columns. Set `layout.object_position` (for example, `"30% 50%"`) only when a crop needs adjustment.
+The default desktop layout automatically cycles through three equal columns. Add `portrait: true` for a vertical photograph; the theme gives it a tall grid cell and portrait intrinsic ratio at every breakpoint. For an optional custom placement, `layout.column_start` is a 1–12 start line, `column_span` is its width, and `row_span` controls height. Tablet and mobile rules ignore desktop columns. Set `layout.object_position` (for example, `"30% 50%"`) only when a crop needs adjustment.
 
 ## Detail view, controls, and accessibility
 
