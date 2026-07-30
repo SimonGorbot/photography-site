@@ -46,3 +46,96 @@ photos:
     alt: "A landscape photographed in Yosemite"
     date: "2025-01-01"
     location: "Yosemite, United States"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4812.JPG"
+    title: "Shanghai after dark"
+    alt: "Crowds beneath brightly illuminated signs on a Shanghai shopping street at night"
+    date: "2026-01-01"
+    location: "Shanghai, China"
+    favourite: true
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5392.JPG"
+    title: "Stone forest"
+    alt: "Forest-covered sandstone pillars receding into mist"
+    date: "2026-01-01"
+    location: "Zhangjiajie, China"
+    favourite: true
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5415.JPG"
+    title: "Red lattice"
+    alt: "Interlocking red and black beams forming a geometric architectural canopy"
+    date: "2026-01-01"
+    location: "China"
+    favourite: true
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4777.JPG"
+    title: "Painted stories"
+    alt: "Painted Buddhist figures and narrative scenes covering a temple wall"
+    date: "2026-01-01"
+    location: "China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4778.JPG"
+    title: "Devotion"
+    alt: "Painted figures kneeling in prayer among Buddhist statues"
+    date: "2026-01-01"
+    location: "China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4840.JPG"
+    title: "The Bund at night"
+    alt: "The illuminated Shanghai skyline across the river beneath low clouds"
+    date: "2026-01-01"
+    location: "Shanghai, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4881.JPG"
+    title: "Evening catch"
+    alt: "A fishmonger standing behind tanks of live seafood at a market"
+    date: "2026-01-01"
+    location: "Shanghai, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4909.JPG"
+    title: "Market colours"
+    alt: "A market vendor surrounded by rows of fresh vegetables under hanging lights"
+    date: "2026-01-01"
+    location: "Shanghai, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4986.JPG"
+    title: "Canal passage"
+    alt: "A quiet scene along a canal in China"
+    date: "2026-01-01"
+    location: "China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4992.JPG"
+    title: "Through the arch"
+    alt: "A small boat travelling along a canal framed by an ivy-covered arch"
+    date: "2026-01-01"
+    location: "Suzhou, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5012.JPG"
+    title: "Vertical garden"
+    alt: "Trees and shrubs growing from sculptural balconies beneath a blue sky"
+    date: "2026-01-01"
+    location: "Shanghai, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5324.JPG"
+    title: "Panda lookout"
+    alt: "A panda-shaped viewing scope facing misty sandstone peaks"
+    date: "2026-01-01"
+    location: "Zhangjiajie, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5351.JPG"
+    title: "On the ridge"
+    alt: "A macaque standing on a rock against a misty mountain forest"
+    date: "2026-01-01"
+    location: "Zhangjiajie, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5374.JPG"
+    title: "Forest portrait"
+    alt: "A young macaque sitting on a rock in a forest"
+    date: "2026-01-01"
+    location: "Zhangjiajie, China"
+
+  - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5409.JPG"
+    title: "Under the eaves"
+    alt: "Red and black structural beams projecting against a pale sky"
+    date: "2026-01-01"
+    location: "China"
