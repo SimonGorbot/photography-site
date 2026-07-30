@@ -13,7 +13,23 @@
   {{- $location := $photo.location | default "unknown" -}}
   {{- $dimensions := $photo.dimensions | default (dict "width" 1500 "height" 1000) -}}
   {{- $urls := $photo.urls | default dict -}}
-  {{- $urls = merge (dict "thumbnail" $source "grid" $source "detail" $source "original" $source) $urls -}}
+  {{- $thumbnail := $source -}}
+  {{- $grid := $source -}}
+  {{- $detail := $source -}}
+  {{- with site.Params.images.transforms -}}
+    {{- if and .enabled .baseURL -}}
+      {{- $transformSource := $source -}}
+      {{- with site.Params.images.baseURL -}}
+        {{- if strings.HasPrefix $source . }}{{ $transformSource = strings.TrimPrefix . $source }}{{ end -}}
+      {{- end -}}
+      {{- $transformSource = strings.TrimPrefix "/" $transformSource -}}
+      {{- $transformBase := strings.TrimSuffix "/" .baseURL -}}
+      {{- with .thumbnail }}{{ $thumbnail = printf "%s/%s/%s" $transformBase . $transformSource }}{{ end -}}
+      {{- with .grid }}{{ $grid = printf "%s/%s/%s" $transformBase . $transformSource }}{{ end -}}
+      {{- with .detail }}{{ $detail = printf "%s/%s/%s" $transformBase . $transformSource }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $urls = merge (dict "thumbnail" $thumbnail "grid" $grid "detail" $detail "original" $source) $urls -}}
   {{- $layout := $photo.layout | default dict -}}
   {{- $record := merge $photo (dict "id" $id "title" $title "alt" $alt "date" $date "location" $location "dimensions" $dimensions "urls" $urls "layout" $layout) -}}
   {{- if $photo.favourite -}}

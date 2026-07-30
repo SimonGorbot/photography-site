@@ -35,7 +35,7 @@ Hugo Pipes concatenates, minifies, and fingerprints CSS, and separately minifies
   favourite: true
 ```
 
-Only `src` is required. Date and location default to `unknown`. Set `favourite: true` to move an image ahead of non-favourites; order remains stable within both groups. The filename supplies the ID and title, the configured photographer supplies fallback alt text, and the theme supplies dimensions and layout defaults.
+Only `src` is required. Date and location default to `unknown`. Set `favourite: true` to move an image ahead of non-favourites; order remains stable within both groups. The filename supplies the ID and title, the configured photographer supplies fallback alt text, and the theme supplies dimensions and layout defaults. Configured image transformations automatically produce the thumbnail, grid, and detail URLs from that single source.
 
 Advanced overrides remain available when needed: `id`, `title`, `alt`, `dimensions`, `urls`, `credit`, and `layout` use the original provider-neutral schema. Explicit variant URLs take precedence over `src`.
 
@@ -72,7 +72,7 @@ npm run deploy:dry-run
 
 ## R2 image hosting
 
-The example loads its photograph directly from the configured public R2 URL. Hugo never downloads or commits the remote original. Add Cloudflare Image Transformation URLs through the advanced `urls` override when automatic web-sized delivery is enabled.
+The example stores originals at the configured public R2 origin, while Cloudflare Image Transformations serve 480-pixel thumbnails, 1200-pixel grid images, and 2400-pixel detail images. Hugo never downloads or commits the remote originals. Transformation settings live once in `hugo.toml`; individual records still need only `src`. Explicit advanced `urls` values override generated variants.
 
 ## Future R2 migration
 

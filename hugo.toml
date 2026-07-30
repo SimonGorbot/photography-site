@@ -16,6 +16,13 @@ transitionEasing = "cubic-bezier(0.22, 1, 0.36, 1)"
 provider = "r2"
 baseURL = "https://r2-media.simongorbet.com"
 
+[params.images.transforms]
+enabled = true
+baseURL = "https://r2-media.simongorbet.com/cdn-cgi/image"
+thumbnail = "width=480,fit=scale-down,quality=82,format=auto"
+grid = "width=1200,fit=scale-down,quality=85,format=auto"
+detail = "width=2400,fit=scale-down,quality=88,format=auto"
+
 [privacy]
   [privacy.disqus]
     disable = true
