@@ -1,7 +1,48 @@
 # Add one record per photograph. Only src is required.
+# Dates, titles, and locations in this demo are assumed and can be edited later.
 # Set favourite: true to place a photograph before the others.
 photos:
-  - src: "https://r2-media.simongorbet.com/photos/yosemite-2025/DSCF3123.JPG"
-    date: "unknown"
-    location: "unknown"
+  - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4142.JPG"
+    title: "Harbour crossing"
+    alt: "A Star Ferry crossing Victoria Harbour at sunset"
+    date: "2026-01-01"
+    location: "Victoria Harbour, Hong Kong"
     favourite: true
+
+  - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4075.JPG"
+    title: "Lantern canopy"
+    alt: "Rows of red, blue, yellow, and green lanterns hanging in sunlight"
+    date: "2026-01-01"
+    location: "Hong Kong"
+    favourite: true
+
+  - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4155.JPG"
+    title: "Central after dark"
+    alt: "Illuminated towers rising into the night sky in Central Hong Kong"
+    date: "2026-01-01"
+    location: "Central, Hong Kong"
+    favourite: true
+
+  - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4060.JPG"
+    title: "Across Lantau"
+    alt: "Cable cars passing above green mountains with the Hong Kong coastline beyond"
+    date: "2026-01-01"
+    location: "Lantau Island, Hong Kong"
+
+  - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4102.JPG"
+    title: "City blocks"
+    alt: "Dense residential buildings overlooking a busy Hong Kong intersection"
+    date: "2026-01-01"
+    location: "Hong Kong"
+
+  - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4221.JPG"
+    title: "Between the trees"
+    alt: "A worker washing sunlit steps framed by dense green trees"
+    date: "2026-01-01"
+    location: "Hong Kong"
+
+  - src: "https://r2-media.simongorbet.com/photos/yosemite-2025/DSCF3123.JPG"
+    title: "Yosemite study"
+    alt: "A landscape photographed in Yosemite"
+    date: "2025-01-01"
+    location: "Yosemite, United States"
