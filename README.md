@@ -35,7 +35,7 @@ Hugo Pipes concatenates, minifies, and fingerprints CSS, and separately minifies
   favourite: true
 ```
 
-Only `src` is required. Date and location default to `unknown`. Set `favourite: true` to move an image ahead of non-favourites; order remains stable within both groups. The filename supplies the ID and title, the configured photographer supplies fallback alt text, and the theme supplies dimensions and layout defaults. Configured image transformations automatically produce the thumbnail, grid, and detail URLs from that single source.
+Only `src` is required. Date and location default to `unknown`. Set `favourite: true` to move an image ahead of non-favourites; order remains stable within both groups. The filename supplies the internal ID and title, the theme supplies accessible fallback text, and image orientation is detected automatically in the browser. Configured image transformations automatically produce the thumbnail, grid, and detail URLs from that single source.
 
 Advanced overrides remain available when needed: `id`, `title`, `alt`, `dimensions`, `urls`, `credit`, and `layout` use the original provider-neutral schema. Explicit variant URLs take precedence over `src`.
 
@@ -45,7 +45,7 @@ Unknown metadata is displayed honestly as `Unknown`; add a date or location only
 
 Add a record containing `src` to the `photos` array; remove the record to remove a photograph. Use ISO `YYYY-MM-DD` dates when known. Use a plain location string such as `Yosemite, United States`. Omit either field to display `Unknown`. Mark any number of records as `favourite: true` to place them first.
 
-The default desktop layout automatically cycles through three equal columns. Add `portrait: true` for a vertical photograph; the theme gives it a tall grid cell and portrait intrinsic ratio at every breakpoint. For an optional custom placement, `layout.column_start` is a 1–12 start line, `column_span` is its width, and `row_span` controls height. Tablet and mobile rules ignore desktop columns. Set `layout.object_position` (for example, `"30% 50%"`) only when a crop needs adjustment.
+The default desktop layout automatically cycles through three equal columns. Once a thumbnail loads, its natural dimensions determine whether its grid cell is portrait or landscape; no orientation setting is required. For an optional custom placement, `layout.column_start` is a 1–12 start line, `column_span` is its width, and `row_span` controls height. Tablet and mobile rules ignore desktop columns. Set `layout.object_position` (for example, `"30% 50%"`) only when a crop needs adjustment.
 
 ## Detail view, controls, and accessibility
 

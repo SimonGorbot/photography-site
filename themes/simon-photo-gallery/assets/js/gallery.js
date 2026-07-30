@@ -118,7 +118,26 @@ if (dialog && dataElement) {
     } else close(true);
   }
 
-  triggers.forEach((trigger) => trigger.addEventListener('click', () => open(byId.get(trigger.dataset.photoId).index, trigger)));
+  function detectOrientation(trigger) {
+    const thumbnail = trigger.querySelector('img');
+    const item = trigger.closest('.gallery-item');
+    if (!thumbnail || !item || item.dataset.orientation !== 'pending') return;
+    const apply = () => {
+      if (!thumbnail.naturalWidth || !thumbnail.naturalHeight) return;
+      const portrait = thumbnail.naturalHeight > thumbnail.naturalWidth;
+      item.dataset.orientation = portrait ? 'portrait' : 'landscape';
+      item.style.setProperty('--row-span', portrait ? '2' : '1');
+      const entry = byId.get(trigger.dataset.photoId);
+      if (entry) entry.photo.dimensions = { width: thumbnail.naturalWidth, height: thumbnail.naturalHeight };
+    };
+    if (thumbnail.complete) apply();
+    else thumbnail.addEventListener('load', apply, { once: true });
+  }
+
+  triggers.forEach((trigger) => {
+    detectOrientation(trigger);
+    trigger.addEventListener('click', () => open(byId.get(trigger.dataset.photoId).index, trigger));
+  });
   dialog.querySelector('.lightbox-previous').addEventListener('click', () => navigate(-1));
   dialog.querySelector('.lightbox-next').addEventListener('click', () => navigate(1));
   closeButton.addEventListener('click', () => close());
