@@ -1,6 +1,6 @@
 {{ $photo := .photo }}
 {{ $layout := $photo.layout }}
-<article class="gallery-item" style="--column-start:{{ $layout.column_start | default 1 }};--column-span:{{ $layout.column_span | default 4 }};--row-span:{{ $layout.row_span | default 1 }};--image-position:{{ $layout.object_position | default "50% 50%" }};">
+<article class="gallery-item"{{ with $photo.favourite }} data-favourite="true"{{ end }} style="--column-start:{{ $layout.column_start | default (add 1 (mul (mod .index 3) 4)) }};--column-span:{{ $layout.column_span | default 4 }};--row-span:{{ $layout.row_span | default 1 }};--image-position:{{ $layout.object_position | default "50% 50%" }};">
   <button class="gallery-trigger" type="button" data-photo-id="{{ $photo.id }}" aria-label="View {{ $photo.title | default $photo.alt }} in detail">
     {{ partial "responsive-image.html" (dict "photo" $photo "eager" (lt .index 3) "context" "grid") }}
   </button>

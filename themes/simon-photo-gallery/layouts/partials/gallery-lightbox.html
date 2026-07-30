@@ -17,4 +17,4 @@
     <button class="lightbox-nav lightbox-next" type="button" aria-label="Next photograph">→</button>
   </div>
 </dialog>
-<script type="application/json" id="gallery-data">{{ hugo.Data.gallery.photos | jsonify | safeJS }}</script>
+<script type="application/json" id="gallery-data">{{ partial "gallery-photos.html" . | jsonify | safeJS }}</script>

@@ -17,10 +17,11 @@ if (dialog && dataElement) {
 
   const detailURL = (photo) => photo.urls.detail;
   const formatDate = (value) => value
+    && value.toLowerCase() !== 'unknown'
     ? new Intl.DateTimeFormat(document.documentElement.lang || 'en', {
       year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'
     }).format(new Date(`${value}T00:00:00Z`))
-    : '';
+    : 'Unknown';
 
   function render(index) {
     activeIndex = (index + photos.length) % photos.length;
@@ -29,9 +30,12 @@ if (dialog && dataElement) {
     image.alt = photo.alt;
     image.width = photo.dimensions.width;
     image.height = photo.dimensions.height;
-    locationText.textContent = [photo.location?.city, photo.location?.country].filter(Boolean).join(', ');
+    locationText.textContent = typeof photo.location === 'string'
+      ? photo.location
+      : [photo.location?.city, photo.location?.country].filter(Boolean).join(', ') || 'Unknown';
     date.textContent = formatDate(photo.date);
-    date.dateTime = photo.date || '';
+    if (photo.date && photo.date.toLowerCase() !== 'unknown') date.dateTime = photo.date;
+    else date.removeAttribute('datetime');
     credit.replaceChildren();
     if (photo.credit?.photographer) {
       credit.append('Photograph by ');

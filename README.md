@@ -24,43 +24,28 @@ The root is a working example site: `hugo.toml` selects the theme, `content/abou
 
 Hugo Pipes concatenates, minifies, and fingerprints CSS, and separately minifies and fingerprints JavaScript. The page remains a complete image grid without JavaScript.
 
-## Gallery manifest schema
+## Gallery manifest
 
-`data/gallery.yaml` contains an ordered `photos` array. Array order is gallery and detail-navigation order. Each record contains:
+`data/gallery.yaml` contains an ordered `photos` array. Adding a photograph normally requires only its public URL:
 
 ```yaml
-- id: unique-stable-id
-  title: Human-readable title
-  alt: Meaningful image description
+- src: https://images.example.com/photos/my-photo.jpg
   date: "2025-09-14"
-  location: { city: Chamonix, country: France }
-  dimensions: { width: 6000, height: 4000 }
-  urls:
-    thumbnail: https://image-host/small
-    grid: https://image-host/medium
-    detail: https://image-host/large
-    original: https://image-host/original
-  credit:
-    photographer: Photographer Name
-    photographer_url: https://example.com/photographer
-    source_name: Unsplash
-    source_url: https://example.com/photo
-  layout:
-    column_start: 1
-    column_span: 4
-    row_span: 1
-    object_position: "50% 50%"
+  location: Chamonix, France
+  favourite: true
 ```
 
-The build fails clearly for missing or duplicate IDs, missing alt/grid/detail values, invalid dates, and non-positive/missing dimensions. Explicit manifest URLs take precedence; relative paths can be resolved against `[params.images].baseURL`.
+Only `src` is required. Date and location default to `unknown`. Set `favourite: true` to move an image ahead of non-favourites; order remains stable within both groups. The filename supplies the ID and title, the configured photographer supplies fallback alt text, and the theme supplies dimensions and layout defaults.
 
-The example dates and locations are **demonstration content**, not verified capture metadata. Replace them or omit optional date/location values rather than representing them as factual Unsplash metadata.
+Advanced overrides remain available when needed: `id`, `title`, `alt`, `dimensions`, `urls`, `credit`, and `layout` use the original provider-neutral schema. Explicit variant URLs take precedence over `src`.
+
+Unknown metadata is displayed honestly as `Unknown`; add a date or location only when you know it.
 
 ## Adding, removing, and editing photographs
 
-Add a complete record to the `photos` array, using a unique URL-safe `id`; remove the entire record to remove a photograph. Keep the desired sequence in file order. Every image needs accurate pixel dimensions and useful alt text. Dates use ISO `YYYY-MM-DD`; location renders as `City, Country`.
+Add a record containing `src` to the `photos` array; remove the record to remove a photograph. Use ISO `YYYY-MM-DD` dates when known. Use a plain location string such as `Yosemite, United States`. Omit either field to display `Unknown`. Mark any number of records as `favourite: true` to place them first.
 
-On desktop, `column_start` is a 1–12 start line, `column_span` is its width, and `row_span` controls height. Ensure the start plus span does not exceed the 12-column grid. Tablet and mobile rules deliberately ignore desktop columns. Change `object_position` (for example, `"30% 50%"`) to move the crop focal point without altering the source.
+The default desktop layout automatically cycles through three equal columns. For an optional custom placement, `layout.column_start` is a 1–12 start line, `column_span` is its width, and `row_span` controls height. Tablet and mobile rules ignore desktop columns. Set `layout.object_position` (for example, `"30% 50%"`) only when a crop needs adjustment.
 
 ## Detail view, controls, and accessibility
 
@@ -85,9 +70,9 @@ npm run deploy:dry-run
 
 `wrangler.toml` deploys `./public` as Workers Static Assets. To perform a real deployment, configure credentials outside the repository and run `wrangler deploy`; no account ID, token, domain, R2 binding, or secret belongs here.
 
-## Unsplash attribution
+## R2 image hosting
 
-Sample files use fixed `images.unsplash.com` URLs (never the random endpoint), load in the browser, and include photographer/source attribution in the manifest. No API key is required and Hugo does not download remote originals. Review Unsplash's current terms before production use and replace demonstration metadata.
+The example loads its photograph directly from the configured public R2 URL. Hugo never downloads or commits the remote original. Add Cloudflare Image Transformation URLs through the advanced `urls` override when automatic web-sized delivery is enabled.
 
 ## Future R2 migration
 
