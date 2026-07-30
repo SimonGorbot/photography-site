@@ -1,0 +1,20 @@
+<dialog class="lightbox" id="gallery-lightbox" aria-labelledby="lightbox-title">
+  <div class="lightbox-header">
+    <a class="site-logo" href="{{ site.Home.RelPermalink }}">{{ site.Params.photographer | default site.Title }}</a>
+    <button class="lightbox-close" type="button" aria-label="Close photograph detail">Close</button>
+  </div>
+  <div class="lightbox-stage">
+    <button class="lightbox-nav lightbox-previous" type="button" aria-label="Previous photograph">←</button>
+    <figure class="lightbox-figure">
+      <h2 class="visually-hidden" id="lightbox-title">Photograph detail</h2>
+      <img class="lightbox-image" src="" alt="" width="1" height="1">
+      <figcaption class="lightbox-caption" aria-live="polite">
+        <span class="lightbox-location"></span>
+        <time class="lightbox-date"></time>
+        <span class="lightbox-credit"></span>
+      </figcaption>
+    </figure>
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Next photograph">→</button>
+  </div>
+</dialog>
+<script type="application/json" id="gallery-data">{{ hugo.Data.gallery.photos | jsonify | safeJS }}</script>

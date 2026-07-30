@@ -1,0 +1,31 @@
+baseURL = "https://example.com/"
+locale = "en-GB"
+title = "Simon Gorbet Photography"
+theme = "simon-photo-gallery"
+disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
+enableRobotsTXT = true
+
+[params]
+photographer = "Simon Gorbet"
+copyright = "All photographs © Simon Gorbet"
+description = "An editorial photography portfolio"
+transitionDuration = "320ms"
+transitionEasing = "cubic-bezier(0.22, 1, 0.36, 1)"
+
+[params.images]
+provider = "unsplash"
+baseURL = ""
+
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.instagram]
+    disable = true
+  [privacy.x]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = true

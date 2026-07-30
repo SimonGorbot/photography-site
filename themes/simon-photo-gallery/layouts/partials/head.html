@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="{{ .Description | default site.Params.description }}">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+{{ $main := resources.Get "css/main.css" }}
+{{ $gallery := resources.Get "css/gallery.css" }}
+{{ $lightbox := resources.Get "css/lightbox.css" }}
+{{ $styles := slice $main $gallery $lightbox | resources.Concat "css/site.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+<style>:root{--gallery-transition-duration:{{ site.Params.transitionDuration | default "320ms" }};--gallery-transition-easing:{{ site.Params.transitionEasing | default "cubic-bezier(0.22, 1, 0.36, 1)" }};}</style>
+{{ if .IsHome }}
+  {{ $script := resources.Get "js/gallery.js" | minify | fingerprint }}
+  <script type="module" src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{ end }}

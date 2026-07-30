@@ -1,0 +1,14 @@
+{
+  "name": "photography-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "hugo server --buildDrafts --disableFastRender",
+    "build": "hugo --gc --minify",
+    "validate": "node --check themes/simon-photo-gallery/assets/js/gallery.js",
+    "deploy:dry-run": "wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "4.27.0"
+  }
+}

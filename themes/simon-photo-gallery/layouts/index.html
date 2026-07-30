@@ -1,0 +1,5 @@
+{{ define "main" }}
+  <h1 class="visually-hidden">{{ site.Title }}</h1>
+  {{ partial "gallery-grid.html" . }}
+{{ end }}
+{{ define "overlay" }}{{ partial "gallery-lightbox.html" . }}{{ end }}

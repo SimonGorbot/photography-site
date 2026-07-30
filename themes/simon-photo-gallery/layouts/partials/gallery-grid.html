@@ -1,0 +1,16 @@
+{{ $photos := hugo.Data.gallery.photos }}
+{{ if not $photos }}{{ errorf "data/gallery.yaml must contain a non-empty photos array" }}{{ end }}
+{{ $seen := newScratch }}
+<section class="gallery" aria-label="Photography gallery">
+  {{ range $index, $photo := $photos }}
+    {{ if not $photo.id }}{{ errorf "gallery photo at index %d is missing id" $index }}{{ end }}
+    {{ if $seen.Get $photo.id }}{{ errorf "duplicate gallery id %q" $photo.id }}{{ end }}
+    {{ $seen.Set $photo.id true }}
+    {{ if not $photo.alt }}{{ errorf "gallery photo %q is missing alt text" $photo.id }}{{ end }}
+    {{ if not $photo.urls.grid }}{{ errorf "gallery photo %q is missing grid URL" $photo.id }}{{ end }}
+    {{ if not $photo.urls.detail }}{{ errorf "gallery photo %q is missing detail URL" $photo.id }}{{ end }}
+    {{ if or (not $photo.dimensions.width) (not $photo.dimensions.height) (le (int $photo.dimensions.width) 0) (le (int $photo.dimensions.height) 0) }}{{ errorf "gallery photo %q has invalid dimensions" $photo.id }}{{ end }}
+    {{ with $photo.date }}{{ if eq (time.AsTime .) nil }}{{ errorf "gallery photo %q has invalid date" $photo.id }}{{ end }}{{ end }}
+    {{ partial "gallery-item.html" (dict "photo" $photo "index" $index) }}
+  {{ end }}
+</section>
