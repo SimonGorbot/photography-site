@@ -17,4 +17,4 @@ For enquiries, add an email address or link to your main website here.
 
 ## Ownership and usage
 
-All photographs remain the property of their credited photographers. Please request permission before reproducing or using an image. The demonstration photographs are loaded from Unsplash and retain their individual source attribution.
+All photographs remain the property of Simon Gorbet. Please request permission before reproducing or using an image.

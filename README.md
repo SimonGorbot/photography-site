@@ -1,6 +1,6 @@
 # Simon Gorbet Photography
 
-A custom Hugo editorial photography portfolio. The example site uses the reusable `themes/simon-photo-gallery` theme, a provider-neutral YAML manifest, Hugo Pipes, and a small vanilla JavaScript dialog. No existing theme, frontend framework, image downloader, or lightbox library is used.
+A custom Hugo editorial photography portfolio. The example site uses the reusable `themes/simon-photo-gallery` theme, a small YAML manifest, Hugo Pipes, and a vanilla JavaScript dialog. No existing theme, frontend framework, image downloader, or lightbox library is used.
 
 ## Requirements and local setup
 
@@ -35,9 +35,7 @@ Hugo Pipes concatenates, minifies, and fingerprints CSS, and separately minifies
   favourite: true
 ```
 
-Only `src` is required. Date and location default to `unknown`. Set `favourite: true` to move an image ahead of non-favourites; order remains stable within both groups. The filename supplies the internal ID and title, the theme supplies accessible fallback text, and image orientation is detected automatically in the browser. Configured image transformations automatically produce the thumbnail, grid, and detail URLs from that single source.
-
-Advanced overrides remain available when needed: `id`, `title`, `alt`, `dimensions`, `urls`, `credit`, and `layout` use the original provider-neutral schema. Explicit variant URLs take precedence over `src`.
+Only `src` is required. Date and location default to `unknown`. Set `favourite: true` to move an image ahead of non-favourites; order remains stable within both groups. The filename supplies the internal ID, the theme supplies accessible fallback text, and image orientation is detected automatically in the browser. Configured image transformations automatically produce the thumbnail, grid, and detail URLs from that single source.
 
 Unknown metadata is displayed honestly as `Unknown`; add a date or location only when you know it.
 
@@ -45,13 +43,13 @@ Unknown metadata is displayed honestly as `Unknown`; add a date or location only
 
 Add a record containing `src` to the `photos` array; remove the record to remove a photograph. Use ISO `YYYY-MM-DD` dates when known. Use a plain location string such as `Yosemite, United States`. Omit either field to display `Unknown`. Mark any number of records as `favourite: true` to place them first.
 
-The default desktop layout automatically cycles through three equal columns. Once a thumbnail loads, its natural dimensions determine whether its grid cell is portrait or landscape; no orientation setting is required. For an optional custom placement, `layout.column_start` is a 1–12 start line, `column_span` is its width, and `row_span` controls height. Tablet and mobile rules ignore desktop columns. Set `layout.object_position` (for example, `"30% 50%"`) only when a crop needs adjustment.
+The default desktop layout automatically cycles through three equal columns. Once a thumbnail loads, its natural dimensions determine whether its grid cell is portrait or landscape; no orientation or layout setting is required.
 
 ## Detail view, controls, and accessibility
 
 Selecting a thumbnail opens a native modal `<dialog>`. Left/Right arrows and visible controls navigate with wraparound; Escape and Close dismiss; horizontal touch swipes navigate when horizontal movement clearly exceeds vertical movement. Adjacent detail images alone are preloaded. Stable `#photo=id` hashes support direct links and browser Back. Closing restores thumbnail focus, Tab is trapped, metadata is politely announced, and focus indicators do not rely on colour alone.
 
-The first row loads eagerly; later images are lazy with intrinsic dimensions, `srcset`, `sizes`, async decoding, and provider-neutral manifest URLs. Reduced-motion preferences suppress nonessential motion.
+The first row loads eagerly; later images are lazy with `srcset`, `sizes`, async decoding, and transformed R2 URLs. Reduced-motion preferences suppress nonessential motion.
 
 ## Replacing the animation
 
@@ -68,21 +66,24 @@ npm run build
 npm run deploy:dry-run
 ```
 
-`wrangler.toml` deploys `./public` as Workers Static Assets. To perform a real deployment, configure credentials outside the repository and run `wrangler deploy`; no account ID, token, domain, R2 binding, or secret belongs here.
+`wrangler.toml` deploys `./public` as Workers Static Assets. To perform a real deployment, authenticate Wrangler outside the repository and run `wrangler deploy`.
 
 ## R2 image hosting
 
-The example stores originals at the configured public R2 origin, while Cloudflare Image Transformations serve 480-pixel thumbnails, 1200-pixel grid images, and 2400-pixel detail images. Hugo never downloads or commits the remote originals. Transformation settings live once in `hugo.toml`; individual records still need only `src`. Explicit advanced `urls` values override generated variants.
+The example stores originals at the configured public R2 origin, while Cloudflare Image Transformations serve 480-pixel thumbnails, 1200-pixel grid images, and 2400-pixel detail images. Hugo never downloads or commits the remote originals. Transformation settings live once in `hugo.toml`; individual records still need only `src`.
 
-## Future R2 migration
+## Sensitive information and Git
 
-The intended flow is **R2 originals → image variants/processing Worker → generated gallery manifest → Hugo theme**. A future generator should emit the same schema into `data/gallery.yaml`, changing only `urls` (and relevant metadata). Set `params.images.provider = "r2"` for documentation/configuration and optionally set `baseURL = "https://images.example.com"` for relative manifest paths. Layouts neither inspect the provider nor construct provider URLs, list buckets, or fetch originals.
+Never commit Cloudflare API tokens, R2 access keys, account IDs, Wrangler session data, `.dev.vars`, or `.env` files. The repository ignores the common local secret files and `.wrangler/` state, but always inspect `git diff --staged` before pushing.
+
+The R2 hostname, object paths, photograph dates, and locations in `data/gallery.yaml` are intentionally public: Hugo embeds them in the generated page. Do not put private bucket names, private object keys, home addresses, or sensitive location data in the manifest. The configured R2 origin is public, so visitors can derive and download the original object URL. Strip private EXIF metadata—especially GPS coordinates—from photographs before uploading, or use a private-origin image delivery architecture if originals must not be public.
+
+Safe to commit: public image URLs, public site configuration, Wrangler's compatibility date, package-lock integrity hashes, and transformation dimensions. Keep all credentials in the Cloudflare dashboard, Wrangler's external authentication store, or ignored local environment files.
 
 ## Troubleshooting
 
 * Confirm `hugo version` says `v0.161.1` and `extended` if templates fail unexpectedly.
 * Run `npm run validate` for JavaScript syntax errors.
-* Read Hugo's named gallery record in build errors and correct the corresponding YAML field.
-* If a crop looks wrong, adjust `object_position`; do not change intrinsic dimensions unless the source itself changes.
+* Read Hugo's gallery index in build errors and ensure that record has a public `src`.
 * If a hash does not open, ensure it exactly matches a unique `id`.
 * If Cloudflare dry-run fails, rebuild first and confirm `public/index.html` exists.

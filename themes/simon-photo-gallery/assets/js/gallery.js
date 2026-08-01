@@ -8,7 +8,6 @@ if (dialog && dataElement) {
   const image = dialog.querySelector('.lightbox-image');
   const locationText = dialog.querySelector('.lightbox-location');
   const date = dialog.querySelector('.lightbox-date');
-  const credit = dialog.querySelector('.lightbox-credit');
   const closeButton = dialog.querySelector('.lightbox-close');
   let activeIndex = 0;
   let returnFocus = null;
@@ -30,35 +29,10 @@ if (dialog && dataElement) {
     image.alt = photo.alt;
     image.width = photo.dimensions.width;
     image.height = photo.dimensions.height;
-    locationText.textContent = typeof photo.location === 'string'
-      ? photo.location
-      : [photo.location?.city, photo.location?.country].filter(Boolean).join(', ') || 'Unknown';
+    locationText.textContent = photo.location || 'Unknown';
     date.textContent = formatDate(photo.date);
     if (photo.date && photo.date.toLowerCase() !== 'unknown') date.dateTime = photo.date;
     else date.removeAttribute('datetime');
-    credit.replaceChildren();
-    if (photo.credit?.photographer) {
-      credit.append('Photograph by ');
-      const photographer = document.createElement(photo.credit.photographer_url ? 'a' : 'span');
-      photographer.textContent = photo.credit.photographer;
-      if (photo.credit.photographer_url) {
-        photographer.href = photo.credit.photographer_url;
-        photographer.target = '_blank';
-        photographer.rel = 'noopener noreferrer';
-      }
-      credit.append(photographer);
-      if (photo.credit.source_name) {
-        credit.append(' on ');
-        const source = document.createElement(photo.credit.source_url ? 'a' : 'span');
-        source.textContent = photo.credit.source_name;
-        if (photo.credit.source_url) {
-          source.href = photo.credit.source_url;
-          source.target = '_blank';
-          source.rel = 'noopener noreferrer';
-        }
-        credit.append(source);
-      }
-    }
     [photos[(activeIndex - 1 + photos.length) % photos.length], photos[(activeIndex + 1) % photos.length]]
       .forEach((adjacent) => { const preload = new Image(); preload.src = detailURL(adjacent); });
   }
@@ -100,9 +74,9 @@ if (dialog && dataElement) {
     target?.focus({ preventScroll: true });
   }
 
-  function navigate(step, updateHash = true) {
+  function navigate(step) {
     transition(() => render(activeIndex + step));
-    if (updateHash) history.replaceState({ gallery: true }, '', `#photo=${encodeURIComponent(photos[activeIndex].id)}`);
+    history.replaceState({ gallery: true }, '', `#photo=${encodeURIComponent(photos[activeIndex].id)}`);
   }
 
   function locationHash() {

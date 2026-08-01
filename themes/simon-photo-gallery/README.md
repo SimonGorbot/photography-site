@@ -6,7 +6,7 @@ A reusable Hugo 0.161.1+ editorial gallery theme using semantic templates, CSS G
 
 Copy this directory to `themes/simon-photo-gallery`, set `theme = "simon-photo-gallery"`, and provide `data/gallery.yaml`. Configure `params.photographer`, `params.copyright`, `params.description`, transition values, and `params.images` in the site configuration. See the repository README for the full manifest schema.
 
-The theme expects an ordered `photos` array. Only `src` is required; date and location default to `unknown`, filename-derived presentation defaults fill the remaining fields, browser image dimensions determine orientation, and `favourite: true` moves a record ahead of regular photographs. Optional `params.images.transforms` settings generate web-sized URLs from any compatible transformation endpoint without branching on the configured provider. Advanced records may still override generated values when needed.
+The theme expects an ordered `photos` array. Only `src` is required; date and location default to `unknown`, browser image dimensions determine orientation, and `favourite: true` moves a record ahead of regular photographs. `params.images.transforms` generates web-sized URLs from the configured transformation endpoint.
 
 ## Customise
 
