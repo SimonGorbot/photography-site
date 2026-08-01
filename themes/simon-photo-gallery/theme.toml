@@ -2,7 +2,7 @@ name = "Simon Photo Gallery"
 license = "MIT"
 description = "A minimal editorial photography portfolio theme."
 homepage = "https://example.com/"
-min_version = "0.161.1"
+min_version = "0.147.7"
 
 [author]
 name = "Simon Gorbet"

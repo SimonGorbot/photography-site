@@ -9,6 +9,7 @@ enableRobotsTXT = true
 photographer = "Simon Gorbet"
 copyright = "All photographs © Simon Gorbet"
 description = "An editorial photography portfolio"
+htmlLang = "en-GB"
 transitionDuration = "320ms"
 transitionEasing = "cubic-bezier(0.22, 1, 0.36, 1)"
 
