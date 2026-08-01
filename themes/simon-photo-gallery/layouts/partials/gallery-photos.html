@@ -9,7 +9,9 @@
   {{- $id := $stem | anchorize -}}
   {{- $title := $stem -}}
   {{- $alt := printf "Photograph by %s" (site.Params.photographer | default site.Title) -}}
-  {{- $date := $photo.date | default "unknown" -}}
+  {{- $metadata := index hugo.Data "gallery-metadata" | default dict -}}
+  {{- $extracted := index $metadata $source | default dict -}}
+  {{- $date := $photo.date | default $extracted.date | default "unknown" -}}
   {{- $location := $photo.location | default "unknown" -}}
   {{- $dimensions := dict "width" 1500 "height" 1000 -}}
   {{- $thumbnail := $source -}}

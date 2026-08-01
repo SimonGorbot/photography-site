@@ -21,7 +21,7 @@ npm run build
 npm run deploy:dry-run
 ```
 
-Gallery entries live in `data/gallery.yaml`; site copy lives in `content/`; and the reusable theme lives in `themes/simon-photo-gallery/`.
+Gallery entries live in `data/gallery.yaml`; capture dates are extracted from image metadata during development and builds; site copy lives in `content/`; and the reusable theme lives in `themes/simon-photo-gallery/`.
 
 Do not commit Cloudflare credentials, `.env` files, `.dev.vars`, or sensitive photograph metadata. Public gallery URLs, dates, and locations are intentionally visible in the generated site.
 

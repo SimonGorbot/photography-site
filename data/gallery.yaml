@@ -1,97 +1,75 @@
 # Add one record per photograph. Only src is required.
-# Dates and locations in this demo are assumed and can be edited later.
+# Locations in this demo are assumed and can be edited later.
 # Set favourite: true to place a photograph before the others.
 photos:
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4142.JPG"
-    date: "2026-01-01"
     location: "Victoria Harbour, Hong Kong"
     favourite: true
 
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4075.JPG"
-    date: "2026-01-01"
     location: "Hong Kong"
     favourite: true
 
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4155.JPG"
-    date: "2026-01-01"
     location: "Central, Hong Kong"
     favourite: true
 
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4060.JPG"
-    date: "2026-01-01"
     location: "Lantau Island, Hong Kong"
 
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4102.JPG"
-    date: "2026-01-01"
     location: "Hong Kong"
 
   - src: "https://r2-media.simongorbet.com/photos/hk-2026/DSCF4221.JPG"
-    date: "2026-01-01"
     location: "Hong Kong"
 
   - src: "https://r2-media.simongorbet.com/photos/yosemite-2025/DSCF3123.JPG"
-    date: "2025-01-01"
     location: "Yosemite, United States"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4812.JPG"
-    date: "2026-01-01"
     location: "Shanghai, China"
     favourite: true
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5392.JPG"
-    date: "2026-01-01"
     location: "Zhangjiajie, China"
     favourite: true
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5415.JPG"
-    date: "2026-01-01"
     location: "China"
     favourite: true
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4777.JPG"
-    date: "2026-01-01"
     location: "China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4778.JPG"
-    date: "2026-01-01"
     location: "China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4840.JPG"
-    date: "2026-01-01"
     location: "Shanghai, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4881.JPG"
-    date: "2026-01-01"
     location: "Shanghai, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4909.JPG"
-    date: "2026-01-01"
     location: "Shanghai, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4986.JPG"
-    date: "2026-01-01"
     location: "China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF4992.JPG"
-    date: "2026-01-01"
     location: "Suzhou, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5012.JPG"
-    date: "2026-01-01"
     location: "Shanghai, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5324.JPG"
-    date: "2026-01-01"
     location: "Zhangjiajie, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5351.JPG"
-    date: "2026-01-01"
     location: "Zhangjiajie, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5374.JPG"
-    date: "2026-01-01"
     location: "Zhangjiajie, China"
 
   - src: "https://r2-media.simongorbet.com/photos/china-2026/DSCF5409.JPG"
-    date: "2026-01-01"
     location: "China"
