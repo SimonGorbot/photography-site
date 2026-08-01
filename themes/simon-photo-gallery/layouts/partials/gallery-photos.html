@@ -1,0 +1,46 @@
+{{- $photos := slice -}}
+{{- $favourites := slice -}}
+{{- $regular := slice -}}
+{{- range $index, $photo := hugo.Data.gallery.photos -}}
+  {{- $source := $photo.src -}}
+  {{- if not $source }}{{ errorf "gallery photo at index %d is missing src" $index }}{{ end -}}
+  {{- $filename := path.Base (urls.Parse $source).Path -}}
+  {{- $stem := strings.TrimSuffix (path.Ext $filename) $filename -}}
+  {{- $id := $stem | anchorize -}}
+  {{- $title := $stem -}}
+  {{- $alt := printf "Photograph by %s" (site.Params.photographer | default site.Title) -}}
+  {{- $metadata := index hugo.Data "gallery-metadata" | default dict -}}
+  {{- $extracted := index $metadata $source | default dict -}}
+  {{- $date := $photo.date | default $extracted.date | default "unknown" -}}
+  {{- $location := $photo.location | default "unknown" -}}
+  {{- $dimensions := dict "width" 1500 "height" 1000 -}}
+  {{- $thumbnail := $source -}}
+  {{- $grid := $source -}}
+  {{- $detail := $source -}}
+  {{- with site.Params.images.transforms -}}
+    {{- if and .enabled .baseURL -}}
+      {{- $transformSource := $source -}}
+      {{- with site.Params.images.baseURL -}}
+        {{- if strings.HasPrefix $source . }}{{ $transformSource = strings.TrimPrefix . $source }}{{ end -}}
+      {{- end -}}
+      {{- $transformSource = strings.TrimPrefix "/" $transformSource -}}
+      {{- $transformBase := strings.TrimSuffix "/" .baseURL -}}
+      {{- with .thumbnail }}{{ $thumbnail = printf "%s/%s/%s" $transformBase . $transformSource }}{{ end -}}
+      {{- with .grid }}{{ $grid = printf "%s/%s/%s" $transformBase . $transformSource }}{{ end -}}
+      {{- with .detail }}{{ $detail = printf "%s/%s/%s" $transformBase . $transformSource }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $urls := dict "thumbnail" $thumbnail "grid" $grid "detail" $detail -}}
+  {{- $record := dict "id" $id "title" $title "alt" $alt "date" $date "location" $location "favourite" ($photo.favourite | default false) "dimensions" $dimensions "urls" $urls -}}
+  {{- if $photo.favourite -}}
+    {{- $favourites = $favourites | append $record -}}
+  {{- else -}}
+    {{- $regular = $regular | append $record -}}
+  {{- end -}}
+{{- end -}}
+{{- $favouriteDates := sort (where $favourites "date" "ne" "unknown") "date" "desc" -}}
+{{- $favourites = $favouriteDates | append (where $favourites "date" "eq" "unknown") -}}
+{{- $regularDates := sort (where $regular "date" "ne" "unknown") "date" "desc" -}}
+{{- $regular = $regularDates | append (where $regular "date" "eq" "unknown") -}}
+{{- $photos = $favourites | append $regular -}}
+{{- return $photos -}}

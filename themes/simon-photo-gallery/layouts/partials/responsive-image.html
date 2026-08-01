@@ -1,0 +1,2 @@
+{{ $photo := .photo }}{{ $urls := $photo.urls }}
+<img src="{{ $urls.grid }}" srcset="{{ $urls.thumbnail }} 480w, {{ $urls.grid }} 1200w" sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw" width="{{ $photo.dimensions.width }}" height="{{ $photo.dimensions.height }}" alt="{{ $photo.alt }}" loading="{{ if .eager }}eager{{ else }}lazy{{ end }}"{{ if .eager }} fetchpriority="high"{{ end }} decoding="async">

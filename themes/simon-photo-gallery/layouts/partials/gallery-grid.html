@@ -1,0 +1,17 @@
+{{ $photos := partial "gallery-photos.html" . }}
+{{ if not $photos }}{{ errorf "data/gallery.yaml must contain a non-empty photos array" }}{{ end }}
+{{ $seen := newScratch }}
+<div class="gallery-sort" aria-label="Sort gallery">
+  <span>sort by:</span>
+  <button type="button" data-gallery-sort="favourites" aria-pressed="true">favourites</button>
+  <button type="button" data-gallery-sort="recent" aria-pressed="false">recent</button>
+  <button type="button" data-gallery-sort="shuffle" aria-pressed="false">shuffle</button>
+</div>
+<section class="gallery" aria-label="Photography gallery">
+  {{ range $index, $photo := $photos }}
+    {{ if not $photo.id }}{{ errorf "gallery photo at index %d is missing id" $index }}{{ end }}
+    {{ if $seen.Get $photo.id }}{{ errorf "duplicate gallery id %q" $photo.id }}{{ end }}
+    {{ $seen.Set $photo.id true }}
+    {{ partial "gallery-item.html" (dict "photo" $photo "index" $index) }}
+  {{ end }}
+</section>

@@ -1,0 +1,4 @@
+<header class="site-header">
+  <a class="site-logo" href="{{ site.Home.RelPermalink }}">{{ site.Params.photographer | default site.Title }}</a>
+  <nav aria-label="Primary"><a href="{{ relref . "/about" }}"{{ if .IsPage }} aria-current="page"{{ end }}>About</a></nav>
+</header>

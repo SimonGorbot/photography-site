@@ -1,0 +1,16 @@
+{
+  "name": "photography-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run gallery:metadata && hugo server --buildDrafts --disableFastRender",
+    "build": "npm run gallery:metadata && hugo --gc --minify",
+    "validate": "node --check themes/simon-photo-gallery/assets/js/gallery.js && node --check scripts/generate-gallery-metadata.js",
+    "gallery:metadata": "node scripts/generate-gallery-metadata.js",
+    "deploy:dry-run": "wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "4.118.0"
+  }
+}

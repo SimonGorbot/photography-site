@@ -1,0 +1,6 @@
+{{ $photo := .photo }}
+<article class="gallery-item" data-orientation="pending" style="--column-start:{{ add 1 (mul (mod .index 3) 4) }};--row-span:1;">
+  <button class="gallery-trigger" type="button" data-photo-id="{{ $photo.id }}" aria-label="View {{ $photo.title | default $photo.alt }} in detail">
+    {{ partial "responsive-image.html" (dict "photo" $photo "eager" (lt .index 3) "context" "grid") }}
+  </button>
+</article>
