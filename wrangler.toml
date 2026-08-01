@@ -4,3 +4,7 @@ workers_dev = true
 
 [assets]
 directory = "./public"
+
+[[routes]]
+pattern = "photos.simongorbet.com"
+custom_domain = true
