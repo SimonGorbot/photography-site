@@ -31,12 +31,16 @@
     {{- end -}}
   {{- end -}}
   {{- $urls := dict "thumbnail" $thumbnail "grid" $grid "detail" $detail -}}
-  {{- $record := dict "id" $id "title" $title "alt" $alt "date" $date "location" $location "dimensions" $dimensions "urls" $urls -}}
+  {{- $record := dict "id" $id "title" $title "alt" $alt "date" $date "location" $location "favourite" ($photo.favourite | default false) "dimensions" $dimensions "urls" $urls -}}
   {{- if $photo.favourite -}}
     {{- $favourites = $favourites | append $record -}}
   {{- else -}}
     {{- $regular = $regular | append $record -}}
   {{- end -}}
 {{- end -}}
+{{- $favouriteDates := sort (where $favourites "date" "ne" "unknown") "date" "desc" -}}
+{{- $favourites = $favouriteDates | append (where $favourites "date" "eq" "unknown") -}}
+{{- $regularDates := sort (where $regular "date" "ne" "unknown") "date" "desc" -}}
+{{- $regular = $regularDates | append (where $regular "date" "eq" "unknown") -}}
 {{- $photos = $favourites | append $regular -}}
 {{- return $photos -}}

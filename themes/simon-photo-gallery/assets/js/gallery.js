@@ -5,6 +5,8 @@ if (dialog && dataElement) {
   const photos = JSON.parse(dataElement.textContent);
   const byId = new Map(photos.map((photo, index) => [photo.id, { photo, index }]));
   const triggers = [...document.querySelectorAll('[data-photo-id]')];
+  const gallery = document.querySelector('.gallery');
+  const sortControls = [...document.querySelectorAll('[data-gallery-sort]')];
   const image = dialog.querySelector('.lightbox-image');
   const locationText = dialog.querySelector('.lightbox-location');
   const date = dialog.querySelector('.lightbox-date');
@@ -108,10 +110,53 @@ if (dialog && dataElement) {
     else thumbnail.addEventListener('load', apply, { once: true });
   }
 
+  const recentValue = (photo) => photo.date === 'unknown' ? 0 : Date.parse(`${photo.date}T00:00:00Z`);
+
+  function applyOrder(ordered) {
+    photos.splice(0, photos.length, ...ordered);
+    byId.clear();
+    photos.forEach((photo, index) => {
+      byId.set(photo.id, { photo, index });
+      const trigger = document.querySelector(`[data-photo-id="${CSS.escape(photo.id)}"]`);
+      const item = trigger?.closest('.gallery-item');
+      if (item) {
+        item.style.setProperty('--column-start', String(1 + ((index % 3) * 4)));
+        gallery.append(item);
+      }
+    });
+  }
+
+  function sortGallery(mode) {
+    const currentFirst = photos[0];
+    const currentTop = new Set(photos.slice(0, 3));
+    const ordered = [...photos];
+    if (mode === 'favourites') {
+      ordered.sort((a, b) => Number(b.favourite) - Number(a.favourite) || recentValue(b) - recentValue(a));
+    } else if (mode === 'recent') {
+      ordered.sort((a, b) => recentValue(b) - recentValue(a));
+    } else {
+      for (let index = ordered.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [ordered[index], ordered[randomIndex]] = [ordered[randomIndex], ordered[index]];
+      }
+      if (ordered.length > 1 && ordered[0] === currentFirst) {
+        const swapIndex = 1 + Math.floor(Math.random() * (ordered.length - 1));
+        [ordered[0], ordered[swapIndex]] = [ordered[swapIndex], ordered[0]];
+      }
+      if (ordered.length > 3 && ordered.slice(0, 3).every((photo) => currentTop.has(photo))) {
+        const swapIndex = 3 + Math.floor(Math.random() * (ordered.length - 3));
+        [ordered[0], ordered[swapIndex]] = [ordered[swapIndex], ordered[0]];
+      }
+    }
+    applyOrder(ordered);
+    sortControls.forEach((control) => control.setAttribute('aria-pressed', String(control.dataset.gallerySort === mode)));
+  }
+
   triggers.forEach((trigger) => {
     detectOrientation(trigger);
     trigger.addEventListener('click', () => open(byId.get(trigger.dataset.photoId).index, trigger));
   });
+  sortControls.forEach((control) => control.addEventListener('click', () => sortGallery(control.dataset.gallerySort)));
   dialog.querySelector('.lightbox-previous').addEventListener('click', () => navigate(-1));
   dialog.querySelector('.lightbox-next').addEventListener('click', () => navigate(1));
   closeButton.addEventListener('click', () => close());
